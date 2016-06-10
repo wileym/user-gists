@@ -1,0 +1,33 @@
+{
+  "name": "user-gists",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wileym/user-gists",
+  "authors": [
+    "Mark Wiley <wileym66@gmail.com>"
+  ],
+  "description": "Search and edit GitHub user Gists.",
+  "directory": "lib",
+  "keywords": [
+    "angular",
+    "github",
+    "gist"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "angular": "^1.5.6",
+    "angular-route": "^1.5.6",
+    "angular-animate": "^1.5.6",
+    "codemirror": "^5.15.2",
+    "angular-resource": "^1.5.6",
+    "bootstrap": "^3.3.6"
+  }
+}
