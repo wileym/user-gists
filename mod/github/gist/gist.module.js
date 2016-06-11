@@ -2,6 +2,6 @@
 	'use strict';
 
 	angular
-		.module('github.gist', []);
+		.module('github.gist', ['common']);
 	
 })(angular);

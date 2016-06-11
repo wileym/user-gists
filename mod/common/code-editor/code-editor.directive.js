@@ -20,7 +20,7 @@
 
 		return {
 			restrict: 'E',
-			template: '<div></div>',
+			template: '<div style="position: relative; height: 100%;"></div>',
 			replace: true,
 			transclude: true,
 			require: '?ngModel',

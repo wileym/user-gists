@@ -28,6 +28,7 @@
     "angular-animate": "^1.5.6",
     "codemirror": "^5.15.2",
     "angular-resource": "^1.5.6",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "angular-strap": "^2.3.9"
   }
 }

@@ -1,0 +1,26 @@
+<div class="gist-edit-route-content">
+	<gist-editor
+		data-content="vm.gist"
+		style="position: absolute; padding-top: 250px; height: 100%; width: 100%;"
+	>
+	</gist-editor>
+
+	<gist-details
+		style="position: absolute;"
+	>
+	</gist-details>
+
+	<div
+		style="position: absolute; top: 170px;"
+	>
+		<button type="button"
+			data-bs-select
+			data-ng-model="vm.selectedIcon"
+			data-bs-options="icon.value as icon.label for icon in vm.icons"
+			class="btn btn-default"
+		>
+		</button>
+		</div>
+	</div>
+
+</div>
