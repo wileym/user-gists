@@ -1,26 +1,37 @@
 <div class="gist-edit-route-content">
 	<gist-editor
-		data-content="vm.gist"
-		style="position: absolute; padding-top: 250px; height: 100%; width: 100%;"
+		data-content="vm.selectedFile.content"
+		style="position: absolute; padding-top: 230px; height: 100%; width: 100%;"
 	>
 	</gist-editor>
 
 	<gist-details
+		data-gist="vm.gist"
 		style="position: absolute;"
 	>
 	</gist-details>
 
-	<div
-		style="position: absolute; top: 170px;"
-	>
-		<button type="button"
-			data-bs-select
-			data-ng-model="vm.selectedIcon"
-			data-bs-options="icon.value as icon.label for icon in vm.icons"
-			class="btn btn-default"
-		>
-		</button>
+	<div style="position: absolute; top: 170px;">
+		<div class="form-inline">
+			<div class="form-group">
+				<label>Select gist file:</label>
+				<select data-ng-model="vm.selectedFile"
+						data-ng-options="file as filename for (filename, file) in vm.gist.files"
+						class="btn btn-default"
+				>
+				</select>
+			</div>
+			<span style="padding-left: 30px; height: 45px; line-height: 45px;">or add a new one</span>
+			<div class="form-group">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="enter new gist file name" data-ng-model="vm.newFileName">
+					<span class="input-group-btn">
+					  <button class="btn btn-default" type="button" data-ng-click="vm.createGistFile">Create</button>
+					</span>
+				</div>
+			</div>
 		</div>
 	</div>
-
 </div>
+
+

@@ -1,8 +1,8 @@
 <div class="gist-details-container">
-	<h3 class="text-primary">{{vm.gist.description}}</h3>
+	<h3 class="text-primary">{{vm.gist.description || '[UNTITLED]'}}</h3>
 	<table class="table" style="width: auto;">
 		<tr><th>Owner:</th><td><a href="{{vm.gist.owner.html_url}}" target="_blank">{{vm.gist.owner.login}}</a></td></tr>
-		<tr><th>Created:</th><td>{{vm.gist.created_at | date : short }}</td></tr>
-		<tr><th>Modified:</th><td>{{vm.gist.updated_at | date : short }}</td></tr>
+		<tr><th>Created:</th><td>{{vm.gist.dateCreated | date : short }}</td></tr>
+		<tr><th>Modified:</th><td>{{vm.gist.dateModified | date : short }}</td></tr>
 	</table>
 </div>

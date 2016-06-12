@@ -5,12 +5,42 @@
 		.module('usergists')
 		.controller('GistEditRouteCtrl', GistEditRouteCtrl);
 
-	GistEditRouteCtrl.$inject = ['$routeParams'];
+	GistEditRouteCtrl.$inject = ['$routeParams', 'Gist'];
 
-	function GistEditRouteCtrl($routeParams){
+	function GistEditRouteCtrl($routeParams, Gist){
 		var vm = this;
-		vm.icons = [{"value":"Gear","label":"<i class=\"fa fa-gear\"></i> Gear"},{"value":"Globe","label":"<i class=\"fa fa-globe\"></i> Globe"},{"value":"Heart","label":"<i class=\"fa fa-heart\"></i> Heart"},{"value":"Camera","label":"<i class=\"fa fa-camera\"></i> Camera"}];
-		vm.selectedIcon = vm.icons[0];
+
+		vm.createGistFile = createGistFile;
+		vm.newFileName = '';
+		vm.selectedFile = {};
+		vm.files = [];
+
+		Gist.get($routeParams.gistId)
+			.then(function(gist){
+				var keys;
+				vm.gist = gist || {};
+				if(vm.gist.files){
+					keys = Object.keys(vm.gist.files);
+					if(keys.length){
+						vm.selectedFile = vm.gist.files[keys[0]];
+						console.log('GistEditRouteCtrl - setting selected file', vm.selectedFile);
+						angular.forEach(vm.gist.files, function(fileObj){
+							vm.files.push(fileObj.filename);
+						});
+					}
+				}
+			});
+
+		function createGistFile(){
+			if(vm.newFileName !== ''){
+				vm.gist.addFiles(vm.newFileName).catch(function(err){
+					console.error('GistEditRouteCtrl.createGistFile - ' + err);
+				});
+			}
+			else{
+				console.warn('GistEditRouteCtrl.createGistFile - Blank file name. No file created.');
+			}
+		}
 	}
 
 })(angular);
