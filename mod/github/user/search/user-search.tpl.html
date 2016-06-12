@@ -1,0 +1,12 @@
+<div class="user-search-container">
+	<input type="text"
+	   data-bs-typeahead
+	   data-ng-model="selectedUser"
+	   data-ng-model-options="searchModelOptions"
+	   data-watch-options="true"
+	   data-bs-on-select="handleUserSelect"
+	   data-bs-options="user for user in matchedUsers"
+	   placeholder="Enter username"
+	   class="form-control"
+   >
+</div>

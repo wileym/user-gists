@@ -4,18 +4,12 @@
 		.module('github.gist')
 		.factory('Gist', GistFactory);
 
-	GistFactory.$inject = ['$q', '$resource'];
+	GistFactory.$inject = ['$q', '$resource', 'GITHUB_HEADERS'];
 
-	function GistFactory($q, $resource){
+	function GistFactory($q, $resource, GITHUB_HEADERS){
 		var gistResource = $resource('https://api.github.com/gists/:gistId', {}, {
-			get: {
-				method: 'GET',
-				headers: {Accept: 'application/vnd.github.v3+json'}
-			},
-			edit: {
-				method: 'PATCH',
-				headers: {Accept: 'application/vnd.github.v3+json'}
-			}
+			get: {method: 'GET', headers: GITHUB_HEADERS},
+			edit: {method: 'PATCH', headers: GITHUB_HEADERS}
 		});
 
 		Gist.prototype = {
@@ -37,6 +31,8 @@
 			this.dateModified = properties.dateModified;
 		}
 
+		//Authentication required for editing (https://developer.github.com/v3/gists/#authentication)
+		//feature skipped for now
 		function addFile(fileName){
 			if(!fileName){
 				console.log('Gist.addFile - invalid file name (' + fileName + '). File will not be added.');
@@ -49,7 +45,11 @@
 				filename: fileName,
 				content: ''
 			};
-			return this.edit().$promise;
+			return gistResource.edit({gistId: this.id}, {
+				files: this.files,
+				public: true,
+				description: this.description
+			});
 		}
 
 		function save(){

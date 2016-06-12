@@ -21,15 +21,20 @@
 				>
 				</select>
 			</div>
+			<!--
+				//Authentication required for editing (https://developer.github.com/v3/gists/#authentication)
+				//feature skipped for now
+
 			<span style="padding-left: 30px; height: 45px; line-height: 45px;">or add a new one</span>
 			<div class="form-group">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="enter new gist file name" data-ng-model="vm.newFileName">
 					<span class="input-group-btn">
-					  <button class="btn btn-default" type="button" data-ng-click="vm.createGistFile">Create</button>
+					  <button class="btn btn-default" type="button" data-ng-click="vm.createGistFile()">Create</button>
 					</span>
 				</div>
 			</div>
+			-->
 		</div>
 	</div>
 </div>

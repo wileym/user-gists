@@ -6,7 +6,7 @@
 
 	configureApp.$inject = ['$routeProvider'];
 	function configureApp($routeProvider){
-		
+
 		$routeProvider
 			.when('/users', {
 				templateUrl: 'app/routes/users/users.route.tpl.html',

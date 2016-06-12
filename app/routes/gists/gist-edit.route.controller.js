@@ -33,7 +33,7 @@
 
 		function createGistFile(){
 			if(vm.newFileName !== ''){
-				vm.gist.addFiles(vm.newFileName).catch(function(err){
+				vm.gist.addFile(vm.newFileName).catch(function(err){
 					console.error('GistEditRouteCtrl.createGistFile - ' + err);
 				});
 			}
