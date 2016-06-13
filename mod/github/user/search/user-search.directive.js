@@ -14,7 +14,6 @@
 			restrict: 'E',
 			templateUrl: 'mod/github/user/search/user-search.tpl.html',
 			scope: {
-				selectedUser: '=',
 				onUserSelect: '&?'
 			},
 			controller: UserSearchCtrl
@@ -25,25 +24,29 @@
 			$scope.onSearchTextChange = onSearchTextChange;
 			$scope.handleUserSelect = handleUserSelect;
 
-			//$scope.selectedUser
 			$scope.matchedUsers = [];
 			$scope.searchModelOptions = {
 				debounce: 200
 			};
-			$scope.$watch('selectedUser', onSearchTextChange);
+			$scope.$watch('userName', onSearchTextChange);
 
 			function onSearchTextChange(newVal, oldVal){
-				User.search($scope.selectedUser).then(
+				if(typeof($scope.userName) !== 'string'){ //seen obj and string -- angular strap bug?
+					return;
+				}
+				User.search($scope.userName).then(
 					function(matchedUsers){
-						$scope.matchedUsers = matchedUsers.map(function(user){ return user.login; });
+						$scope.matchedUsers = matchedUsers;
 					}
 				);
 			}
 
-			function handleUserSelect(user, index, $typeahead){
-				$scope.selectedUser = user;
+			function handleUserSelect(ghUser, index, $typeahead){
+				if(ghUser.hasOwnProperty('login') === false){
+					return;
+				}
 				if(angular.isFunction($scope.onUserSelect)){
-					$scope.onUserSelect({user: $scope.selectedUser});
+					$scope.onUserSelect({user: User.fromGithubUser(ghUser)});
 				}
 				$typeahead.hide();
 			}

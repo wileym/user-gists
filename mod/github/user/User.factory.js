@@ -4,27 +4,24 @@
 		.module('github.user')
 		.factory('User', UserFactory);
 
-	UserFactory.$inject = ['$q', '$resource', 'GITHUB_HEADERS'];
+	UserFactory.$inject = ['$q', '$resource', 'Gist', 'GITHUB_HEADERS'];
 
-	function UserFactory($q, $resource, GITHUB_HEADERS){
+	function UserFactory($q, $resource, Gist, GITHUB_HEADERS){
 		var userResource = $resource('https://api.github.com/users/:userId', {}, {
-			get: {
-				method: 'GET',
-				headers: GITHUB_HEADERS
-			}
+			get: {method: 'GET', headers: GITHUB_HEADERS}
+		});
+		var userGistsResource = $resource('https://api.github.com/users/:userId/gists', {}, {
+			get: {method: 'GET', isArray: true, headers: GITHUB_HEADERS}
 		});
 		var userSearchResource = $resource('https://api.github.com/search/users', {}, {
-			search: {
-				method: 'GET',
-				isArray: true,
-				headers: GITHUB_HEADERS
-			}
+			search: {method: 'GET', isArray: true, headers: GITHUB_HEADERS}
 		});
 
 		User.prototype = {
 			constructor: User,
 			toGithubUser: toGithubUser,
-			save: save
+			save: save,
+			getGists: getGists
 		};
 		User.search = searchUsers;
 		User.fromGithubUser = fromGithubUser;
@@ -40,6 +37,7 @@
 			this.username = properties.username;
 			this.name = properties.name;
 			this.profileUrl = properties.profileUrl;
+			this.avatar = properties.avatar;
 			this.gistsUrl = properties.gistsUrl;
 		}
 
@@ -55,6 +53,12 @@
 
 		function save(){
 			userResource.save({userId: this.id}, this.toGithubUser());
+		}
+
+		function getGists(){
+			return userGistsResource.get({userId: this.username}).$promise.then(function(result){
+				return result.map(Gist.fromGithubGist);
+			});
 		}
 
 		//--- User service/static functions ---//
@@ -79,6 +83,7 @@
 				username: githubUser.login,
 				name: githubUser.name,
 				profileUrl: githubUser.html_url,
+				avatar: githubUser.avatar_url,
 				gistsUrl: githubUser.gists_url
 			});
 		}

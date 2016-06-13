@@ -28,7 +28,7 @@
 				<div data-ng-view style="width: 100%; height: 100%; position: relative;"></div>
 			</div>
 			<div class="users-select-container right-to-left">
-				<user-search-list></user-search-list>
+				<user-search-list data-on-user-select="main.handleUserSelect(user)"></user-search-list>
 			</div>
 		</div>
 

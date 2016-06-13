@@ -10,7 +10,7 @@
 			restrict: 'E',
 			templateUrl: 'mod/github/user/search-list/user-search-list.tpl.html',
 			scope: {
-
+				onUserSelect: '&?' //pass {user: User}
 			},
 			controller: UserSearchListCtrl,
 			controllerAs: 'vm',
@@ -20,11 +20,15 @@
 
 	function UserSearchListCtrl(){
 		var vm = this;
-		vm.selectedUser = '';
-		vm.onUserSelect = onUserSelect;
-		
-		function onUserSelect(user){
-			console.log('Selected User: ' + user);
+		vm.handleUserSelect = handleUserSelect;
+
+		function handleUserSelect(user){
+			if(!angular.isFunction(vm.onUserSelect)){
+				console.warn('UserSearchListCtrl.handleUserSelect - not implemented by parent...');
+			}
+			else{
+				vm.onUserSelect({user: user});
+			}
 		}
 	}
 

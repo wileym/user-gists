@@ -17,6 +17,7 @@
 			addFile: addFile,
 			save: save
 		};
+		Gist.fromGithubGist = fromGithubGist;
 		Gist.get = getGist;
 		Gist.create = createGist;
 		return Gist;
@@ -57,21 +58,10 @@
 		}
 
 		//--- Gist service/static functions ---//
-		
-		function createGist(){
-			gistResource.post({
-				
-			})
-		}
 
-		function getGist(gistId){
-			gistId = gistId || '4354222';
-			return gistResource.get({gistId: gistId}).$promise.then(morphGistData);
-		}
-		
-		function morphGistData(githubGist){
-			var gist, githubGist = githubGist || {};
-			gist = new Gist({
+		function fromGithubGist(githubGist){
+			githubGist = githubGist || {};
+			return new Gist({
 				id: githubGist.id,
 				files: githubGist.files || {},
 				owner: githubGist.owner || {},
@@ -79,7 +69,18 @@
 				dateCreated: githubGist.created_at,
 				dateModified: githubGist.updated_at
 			});
-			return gist;
+		}
+
+		function getGist(gistId){
+			if(!gistId || !angular.isString(gistId)){
+				console.warn('Gist.get - Invalid gistId: ' + gistId);
+				return $q.reject('Invalid gist ID.');
+			}
+			return gistResource.get({gistId: gistId}).$promise.then(fromGithubGist);
+		}
+
+		function createGist(){
+
 		}
 
 	}
