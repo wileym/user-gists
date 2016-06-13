@@ -36,6 +36,7 @@
 			this.id = properties.id;
 			this.username = properties.username;
 			this.name = properties.name;
+			this.bio = properties.bio;
 			this.profileUrl = properties.profileUrl;
 			this.avatar = properties.avatar;
 			this.gistsUrl = properties.gistsUrl;
@@ -46,7 +47,9 @@
 				id: this.id,
 				login: this.username,
 				name: this.name,
+				bio: this.bio,
 				html_url: this.profileUrl,
+				avatar_url: this.avatar,
 				gists_url: this.gistsUrl
 			};
 		}
@@ -82,6 +85,7 @@
 				id: githubUser.id,
 				username: githubUser.login,
 				name: githubUser.name,
+				bio: githubUser.bio,
 				profileUrl: githubUser.html_url,
 				avatar: githubUser.avatar_url,
 				gistsUrl: githubUser.gists_url

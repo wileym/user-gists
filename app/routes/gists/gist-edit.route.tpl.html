@@ -1,4 +1,5 @@
 <div class="gist-edit-route-content">
+
 	<gist-editor
 		data-content="vm.selectedFile.content"
 		style="position: absolute; padding-top: 230px; height: 100%; width: 100%;"
@@ -7,11 +8,19 @@
 
 	<gist-details
 		data-gist="vm.gist"
-		style="position: absolute;"
+		style="position: absolute; top: 10px;"
 	>
 	</gist-details>
 
-	<div style="position: absolute; top: 170px;">
+	<div style="position: absolute; top: 5px;">
+		<a href="{{'#/users/' + vm.gist.owner.login + '/gists/'}}"
+		   style="color: #999;"
+		>
+		&#x21E6; back to {{vm.gist.owner.login}}'s Gists
+		</a>
+	</div>
+
+	<div style="position: absolute; top: 180px; left: 10px;">
 		<div class="form-inline">
 			<div class="form-group">
 				<label>Select gist file:</label>

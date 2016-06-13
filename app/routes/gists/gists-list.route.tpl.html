@@ -1,8 +1,8 @@
 <div style="height: 100%;">
-	<p>Select one of {{vm.username}}'s Gists:</p>
-	<ul>
-		<li data-ng-repeat="gist in vm.gists">
-			<a href="{{'#/users/' + vm.user.username + '/gists/' + gist.id}}">{{gist.id}}</a>
+	<user-details data-user="vm.user"></user-details>
+	<ul class="list-group">
+		<li data-ng-repeat="gist in vm.gists" class="list-group-item">
+			<a href="{{'#/users/' + vm.user.username + '/gists/' + gist.id}}">{{gist.description || gist.id}}</a>
 		</li>
 	</ul>
 </div>
