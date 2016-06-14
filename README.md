@@ -59,6 +59,6 @@ Developed by Mark Wiley
 
 ## License
 
-Copyright &copy; 2011-2016 Mark Wiley.
+Copyright &copy; 2016 Mark Wiley.
 
 All code is licensed under MIT. See LICENSE file for details.
