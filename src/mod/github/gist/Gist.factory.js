@@ -66,6 +66,7 @@
 				files: githubGist.files || {},
 				owner: githubGist.owner || {},
 				description: githubGist.description,
+				comments: githubGist.comments,
 				dateCreated: githubGist.created_at,
 				dateModified: githubGist.updated_at
 			});
