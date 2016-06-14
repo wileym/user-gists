@@ -7,7 +7,7 @@ Search and view GitHub users' Gists
 <img src="https://cloud.wiley-family.net/user-gists-demo.gif" style="width: 650px; height: 400px;">
 
 ## Installation
-    git clone https://github.com/mwiley/user-gists.git
+    git clone https://github.com/wileym/user-gists.git
     cd user-gists
     npm install
     bower install
